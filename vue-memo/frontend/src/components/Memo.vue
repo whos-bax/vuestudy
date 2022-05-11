@@ -11,14 +11,22 @@
 
 <script>
 import { reactive } from "vue";
+import axios from "axios";
+
 export default {
   setup() {
     const state = reactive({
       data: [],
     });
+
     const add = () => {
       state.data.push("추가된 메모내용");
     };
+
+    axios.get("/api/memos").then((res) => {
+      console.log(res.data);
+      state.data = res.data;
+    });
 
     return { state, add };
   },
@@ -38,7 +46,7 @@ export default {
 
     li {
       padding: 15px;
-      margin: 5px;
+      margin: 10px;
       border: 1px solid #eee;
     }
   }

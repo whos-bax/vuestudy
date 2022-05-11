@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const memos = ["메모 1 내용, 메모 2 내용, 메모 3 내용"];
+const memos = ["메모 1 내용", "메모 2 내용", "메모 3 내용"];
 
-app.get("/memos", (req, res) => {
+app.get("/api/memos", (req, res) => {
   res.send(memos);
 });
 
