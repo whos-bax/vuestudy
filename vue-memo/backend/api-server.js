@@ -13,9 +13,10 @@ app.get("/api/memos", async (req, res) => {
   res.send(result);
 });
 
-app.post("/api/memos", (req, res) => {
-  memos.push(req.body.content);
-  res.send(memos);
+app.post("/api/memos", async (req, res) => {
+  await database.run(`INSERT INTO memos (content) VALUES ('${req.body.content}')`);
+  const result = await database.run("SELECT * FROM memos");
+  res.send(result);
 });
 
 app.put("/api/memos/:idx", (req, res) => {
