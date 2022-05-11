@@ -20,8 +20,9 @@ export default {
     });
 
     const add = () => {
-      // state.data.push("추가된 메모내용");
-      axios.post("/api/memos").then((res) => {
+      const content = prompt("내용을 입력해주세요.");
+
+      axios.post("/api/memos", { content }).then((res) => {
         state.data = res.data;
       });
     };
