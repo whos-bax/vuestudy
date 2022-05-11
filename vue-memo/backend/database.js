@@ -8,22 +8,25 @@ const pool = mariadb.createPool({
 });
 
 module.exports = {
-  run(query) {
-    pool
-      .getConnection()
-      .then((conn) => {
-        conn
-          .query(query)
-          .then((rows) => {
-            console.log(rows);
-          })
-          .catch((err) => {
-            console.log(err);
-            conn.end();
-          });
-      })
-      .catch((err) => {
-        //not connected
-      });
+  async run(query) {
+    return new Promise((resolve) => {
+      pool
+        .getConnection()
+        .then((conn) => {
+          conn
+            .query(query)
+            .then((rows) => {
+              resolve(rows);
+              conn.end();
+            })
+            .catch((err) => {
+              console.log(err);
+              conn.end();
+            });
+        })
+        .catch((err) => {
+          //not connected
+        });
+    });
   },
 };

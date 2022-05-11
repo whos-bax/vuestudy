@@ -8,9 +8,9 @@ const memos = [];
 
 app.use(bodyParser.json());
 
-app.get("/api/memos", (req, res) => {
-  database.run("SELECT * FROM memos");
-  res.send(memos);
+app.get("/api/memos", async (req, res) => {
+  const result = await database.run("SELECT * FROM memos");
+  res.send(result);
 });
 
 app.post("/api/memos", (req, res) => {
