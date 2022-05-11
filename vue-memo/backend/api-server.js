@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
+const database = require("./database")
 
 const memos = [];
 
 app.use(bodyParser.json());
 
 app.get("/api/memos", (req, res) => {
+  database.run("SELECT * FROM memos");
   res.send(memos);
 });
 
