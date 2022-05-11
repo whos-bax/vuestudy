@@ -8,6 +8,11 @@ app.get("/api/memos", (req, res) => {
   res.send(memos);
 });
 
+app.post("/api/memos", (req, res) => {
+  memos.push("추가 내용");
+  res.send(memos);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

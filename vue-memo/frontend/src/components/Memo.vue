@@ -20,11 +20,13 @@ export default {
     });
 
     const add = () => {
-      state.data.push("추가된 메모내용");
+      // state.data.push("추가된 메모내용");
+      axios.post("/api/memos").then((res) => {
+        state.data = res.data;
+      });
     };
 
     axios.get("/api/memos").then((res) => {
-      console.log(res.data);
       state.data = res.data;
     });
 
