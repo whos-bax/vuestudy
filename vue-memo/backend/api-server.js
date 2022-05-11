@@ -19,9 +19,10 @@ app.post("/api/memos", async (req, res) => {
   res.send(result);
 });
 
-app.put("/api/memos/:idx", (req, res) => {
-  memos[req.params.idx] = req.body.content;
-  res.send(memos);
+app.put("/api/memos/:id", async (req, res) => {
+  await database.run(`UPDATE memos SET content = '${req.body.content}' WHERE id = ${req.params.id}`);
+  const result = await database.run("SELECT * FROM memos");
+  res.send(result);
 });
 
 app.listen(port, () => {
